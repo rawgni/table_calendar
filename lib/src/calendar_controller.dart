@@ -381,7 +381,8 @@ class CalendarController {
   }
 
   bool _isWeekend(DateTime day) {
-    return day.weekday == DateTime.saturday || day.weekday == DateTime.sunday;
+    // return day.weekday == DateTime.saturday || day.weekday == DateTime.sunday;
+    return day.weekday == DateTime.sunday;
   }
 
   bool _isExtraDay(DateTime day) {
