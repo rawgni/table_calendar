@@ -31,10 +31,11 @@ class CellWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
+    // return AnimatedContainer(
+    //   duration: const Duration(milliseconds: 250),
+    return Container(
       decoration: _buildCellDecoration(),
-      margin: const EdgeInsets.all(6.0),
+      // margin: const EdgeInsets.all(6.0),
       alignment: Alignment.center,
       child: Text(
         text,
@@ -44,6 +45,20 @@ class CellWidget extends StatelessWidget {
   }
 
   Decoration _buildCellDecoration() {
+    if (isWeekend) {
+      return BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 1.0, color: Colors.grey),
+        ),
+      );
+    }
+    return BoxDecoration(
+      border: Border(
+        left: BorderSide(width: 1.0, color: Colors.grey),
+        bottom: BorderSide(width: 1.0, color: Colors.grey),
+      )
+    );
+    /*
     if (isSelected && calendarStyle.renderSelectedFirst) {
       return BoxDecoration(shape: BoxShape.circle, color: calendarStyle.selectedColor);
     } else if (isToday) {
@@ -53,9 +68,17 @@ class CellWidget extends StatelessWidget {
     } else {
       return BoxDecoration(shape: BoxShape.circle);
     }
+    */
   }
 
   TextStyle _buildCellTextStyle() {
+    if (isHoliday) {
+      return calendarStyle.holidayStyle;
+    } else if (isWeekend) {
+      return calendarStyle.weekendStyle;
+    }
+    return calendarStyle.weekdayStyle;
+    /*
     if (isUnavailable) {
       return calendarStyle.unavailableStyle;
     } else if (isSelected && calendarStyle.renderSelectedFirst) {
@@ -77,5 +100,6 @@ class CellWidget extends StatelessWidget {
     } else {
       return calendarStyle.weekdayStyle;
     }
+    */
   }
 }
