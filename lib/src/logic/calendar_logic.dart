@@ -284,7 +284,8 @@ class CalendarLogic {
   }
 
   bool isWeekend(DateTime day) {
-    return day.weekday == DateTime.saturday || day.weekday == DateTime.sunday;
+    // return day.weekday == DateTime.saturday || day.weekday == DateTime.sunday;
+    return day.weekday == DateTime.sunday;
   }
 
   bool isExtraDay(DateTime day) {
