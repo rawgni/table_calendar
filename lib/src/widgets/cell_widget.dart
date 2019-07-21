@@ -5,6 +5,7 @@ part of table_calendar;
 
 class _CellWidget extends StatelessWidget {
   final String text;
+  final String altText;
   final bool isUnavailable;
   final bool isSelected;
   final bool isToday;
@@ -16,6 +17,7 @@ class _CellWidget extends StatelessWidget {
   const _CellWidget({
     Key key,
     @required this.text,
+    this.altText = '',
     this.isUnavailable = false,
     this.isSelected = false,
     this.isToday = false,
@@ -23,7 +25,8 @@ class _CellWidget extends StatelessWidget {
     this.isOutsideMonth = false,
     this.isHoliday = false,
     @required this.calendarStyle,
-  })  : assert(text != null),
+  })
+      : assert(text != null),
         assert(calendarStyle != null),
         super(key: key);
 
@@ -35,9 +38,49 @@ class _CellWidget extends StatelessWidget {
       decoration: _buildCellDecoration(),
       // margin: const EdgeInsets.all(6.0),
       alignment: Alignment.center,
-      child: Text(
-        text,
-        style: _buildCellTextStyle(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(2.0),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+            ),
+            height: 4.0,
+          ),
+          Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                text,
+                style: _buildCellTextStyle(),
+              ),
+            ),
+          ),
+
+          Visibility(
+            visible: !isOutsideMonth,
+            child: Text(
+              altText,
+              style: TextStyle(
+                fontSize: 10.0,
+                color: isWeekend || isHoliday ? Colors.red : Colors.black,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.all(2.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: isToday ? Colors.grey : Colors.transparent,
+              ),
+              height: 4.0,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -46,15 +89,15 @@ class _CellWidget extends StatelessWidget {
     if (isWeekend) {
       return BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 1.0, color: Colors.grey),
+          bottom: BorderSide(width: 2.0, color: Colors.grey[500]),
         ),
       );
     }
     return BoxDecoration(
       border: Border(
-        left: BorderSide(width: 1.0, color: Colors.grey),
-        bottom: BorderSide(width: 1.0, color: Colors.grey),
-      )
+        left: BorderSide(width: 2.0, color: Colors.grey[500]),
+        bottom: BorderSide(width: 2.0, color: Colors.grey[500]),
+      ),
     );
     /*
     if (isSelected && calendarStyle.renderSelectedFirst) {
@@ -70,21 +113,14 @@ class _CellWidget extends StatelessWidget {
   }
 
   TextStyle _buildCellTextStyle() {
-    if (isHoliday) {
-      return calendarStyle.holidayStyle;
-    } else if (isWeekend) {
-      return calendarStyle.weekendStyle;
-    }
-    return calendarStyle.weekdayStyle;
-    /*
     if (isUnavailable) {
       return calendarStyle.unavailableStyle;
-    } else if (isSelected && calendarStyle.renderSelectedFirst) {
-      return calendarStyle.selectedStyle;
-    } else if (isToday) {
-      return calendarStyle.todayStyle;
-    } else if (isSelected) {
-      return calendarStyle.selectedStyle;
+      // } else if (isSelected && calendarStyle.renderSelectedFirst) {
+      //   return calendarStyle.selectedStyle;
+      // } else if (isToday) {
+      //   return calendarStyle.todayStyle;
+      // } else if (isSelected) {
+      // return calendarStyle.selectedStyle;
     } else if (isOutsideMonth && isHoliday) {
       return calendarStyle.outsideHolidayStyle;
     } else if (isHoliday) {
@@ -98,6 +134,5 @@ class _CellWidget extends StatelessWidget {
     } else {
       return calendarStyle.weekdayStyle;
     }
-    */
   }
 }
