@@ -89,14 +89,14 @@ class _CellWidget extends StatelessWidget {
     if (isWeekend) {
       return BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 2.0, color: Colors.grey[500]),
+          bottom: BorderSide(width: calendarStyle.cellBorderWidth, color: calendarStyle.cellBorderColor),
         ),
       );
     }
     return BoxDecoration(
       border: Border(
-        left: BorderSide(width: 2.0, color: Colors.grey[500]),
-        bottom: BorderSide(width: 2.0, color: Colors.grey[500]),
+        left: BorderSide(width: calendarStyle.cellBorderWidth, color: calendarStyle.cellBorderColor),
+        bottom: BorderSide(width: calendarStyle.cellBorderWidth, color: calendarStyle.cellBorderColor),
       ),
     );
     /*
