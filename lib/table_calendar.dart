@@ -499,8 +499,14 @@ class _TableCalendarState extends State<TableCalendar>
     return TableRow(
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(width: 2.0, color: Colors.grey[500]),
-          bottom: BorderSide(width: 2.0, color: Colors.grey[500]),
+          top: BorderSide(
+              width: widget.calendarStyle.cellBorderWidth,
+              color: widget.calendarStyle.cellBorderColor,
+          ),
+          bottom: BorderSide(
+              width: widget.calendarStyle.cellBorderWidth,
+              color: widget.calendarStyle.cellBorderColor,
+          ),
         ),
       ),
       children: _calendarLogic.visibleDays.take(7).map((date) {
@@ -508,7 +514,12 @@ class _TableCalendarState extends State<TableCalendar>
           padding: EdgeInsets.all(10.0),
           decoration: _calendarLogic.isWeekend(date) ? BoxDecoration():
           BoxDecoration(
-            border: Border(left: BorderSide(width: 2.0, color: Colors.grey[500])),
+            border: Border(
+                left: BorderSide(
+                    width: widget.calendarStyle.cellBorderWidth,
+                    color: widget.calendarStyle.cellBorderColor
+                )
+            ),
           ),
           child: Center(
             child: Text(
