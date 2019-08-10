@@ -12,6 +12,8 @@ typedef void OnVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat 
 /// Builder signature for any text that can be localized and formatted with `DateFormat`.
 typedef String TextBuilder(DateTime date, dynamic locale);
 
+typedef String AltTextBuilder(DateTime day);
+
 /// Format to display the `TableCalendar` with.
 enum CalendarFormat { month, twoWeeks, week }
 
@@ -123,6 +125,9 @@ class TableCalendar extends StatefulWidget {
   /// Set of Builders for `TableCalendar` to work with.
   final CalendarBuilders builders;
 
+  // generate alt text
+  final AltTextBuilder altTextBuilder;
+
   TableCalendar({
     Key key,
     @required this.calendarController,
@@ -155,6 +160,7 @@ class TableCalendar extends StatefulWidget {
     this.daysOfWeekStyle = const DaysOfWeekStyle(),
     this.headerStyle = const HeaderStyle(),
     this.builders = const CalendarBuilders(),
+    this.altTextBuilder,
   })  : assert(calendarController != null),
         assert(availableCalendarFormats.keys.contains(initialCalendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
