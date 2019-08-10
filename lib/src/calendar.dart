@@ -437,15 +437,40 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
 
   TableRow _buildDaysOfWeek() {
     return TableRow(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            width: widget.calendarStyle.cellBorderWidth,
+            color: widget.calendarStyle.cellBorderColor,
+          ),
+          bottom: BorderSide(
+            width: widget.calendarStyle.cellBorderWidth,
+            color: widget.calendarStyle.cellBorderColor,
+          ),
+        ),
+      ),
       children: widget.calendarController._visibleDays.value.take(7).map((date) {
-        return Center(
-          child: Text(
-            widget.daysOfWeekStyle.dowTextBuilder != null
-                ? widget.daysOfWeekStyle.dowTextBuilder(date, widget.locale)
-                : DateFormat.E(widget.locale).format(date),
-            style: widget.calendarController._isWeekend(date)
-                ? widget.daysOfWeekStyle.weekendStyle
-                : widget.daysOfWeekStyle.weekdayStyle,
+        return Container(
+          padding: EdgeInsets.all(10.0),
+          decoration: widget.calendarController._isWeekend(date) ?
+            BoxDecoration():
+            BoxDecoration(
+              border: Border(
+                left: BorderSide(
+                  width: widget.calendarStyle.cellBorderWidth,
+                  color: widget.calendarStyle.cellBorderColor,
+                ),
+              ),
+            ),
+          child: Center(
+            child: Text(
+              widget.daysOfWeekStyle.dowTextBuilder != null
+                  ? widget.daysOfWeekStyle.dowTextBuilder(date, widget.locale)
+                  : DateFormat.E(widget.locale).format(date),
+              style: widget.calendarController._isWeekend(date)
+                  ? widget.daysOfWeekStyle.weekendStyle
+                  : widget.daysOfWeekStyle.weekdayStyle,
+            ),
           ),
         );
       }).toList(),
