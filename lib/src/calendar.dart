@@ -605,6 +605,7 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
     } else {
       return _CellWidget(
         text: '${date.day}',
+        altText: widget.altTextBuilder(date),
         isUnavailable: tIsUnavailable,
         isSelected: tIsSelected,
         isToday: tIsToday,
