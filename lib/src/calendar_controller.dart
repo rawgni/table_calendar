@@ -149,6 +149,14 @@ class CalendarController {
     _calendarFormat.value = _nextFormat();
   }
 
+  void setEvents(Map<DateTime, List> events) {
+    _events = events;
+  }
+
+  void setHolidays(Map<DateTime, List> holidays) {
+    _holidays = holidays;
+  }
+
   /// Sets calendar format by emulating swipe.
   void swipeCalendarFormat({@required bool isSwipeUp}) {
     assert(isSwipeUp != null);
