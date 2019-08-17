@@ -383,7 +383,7 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
 
     return Container(
       key: key,
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      // margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: wrappedChild,
     );
   }
@@ -557,7 +557,7 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
 
     return GestureDetector(
       behavior: widget.dayHitTestBehavior,
-      onTap: () => _isDayUnavailable(date) ? _onUnavailableDaySelected() : _selectDay(date),
+      onTap: () => (_isDayUnavailable(date) || widget.calendarController._isExtraDay(date)) ? _onUnavailableDaySelected() : _selectDay(date),
       child: content,
     );
   }
