@@ -265,9 +265,9 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
     }
 
     children.addAll([
-      const SizedBox(height: 10.0),
+      // const SizedBox(height: 10.0),
       _buildCalendarContent(),
-      const SizedBox(height: 4.0),
+      // const SizedBox(height: 4.0),
     ]);
 
     return ClipRect(
